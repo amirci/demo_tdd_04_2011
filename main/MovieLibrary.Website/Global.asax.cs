@@ -1,9 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Configuration;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using CommonServiceLocator.WindsorAdapter;
 using Microsoft.Practices.ServiceLocation;
+using MovieLibrary.Core;
+using MovieLibrary.Storage.NHibernate;
 using MovieLibrary.Website.Controllers;
 
 namespace MovieLibrary.Website
@@ -45,7 +48,11 @@ namespace MovieLibrary.Website
         {
             var container = new WindsorContainer();
 
+            // Get the configuration object to access the related Web.config file.
+            var dbFile = WebConfigurationManager.AppSettings["MovieDatabaseFile"];
+
             container.Register(
+                Component.For<IMovieLibrary>().Instance(new SimpleMovieLibrary(dbFile)),
                 Component.For<IControllerFactory>().ImplementedBy<WindsorControllerFactory>(),
                 Component.For<MoviesController>().LifeStyle.Transient);
 
