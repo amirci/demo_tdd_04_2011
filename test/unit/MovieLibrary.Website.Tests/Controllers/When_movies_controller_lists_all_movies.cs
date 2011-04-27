@@ -35,9 +35,9 @@ namespace MovieLibrary.Website.Tests.Controllers
         {
             var result = (ViewResult)this.ActualResult;
 
-            result.ViewData
-                .Cast<IEnumerable<IMovie>>()
-                .Should().Have.SameValuesAs(this._movies);
+            var actual = (IEnumerable<IMovie>) result.ViewData.Model;
+
+            actual.Should().Have.SameValuesAs(this._movies);
         }
 
         /// <summary>

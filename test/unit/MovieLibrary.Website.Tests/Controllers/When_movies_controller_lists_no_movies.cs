@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using MovieLibrary.Core;
 using MavenThought.Commons.Testing;
 using MvcContrib.TestHelper;
+using Rhino.Mocks;
 using SharpTestsEx;
 
 namespace MovieLibrary.Website.Tests.Controllers
@@ -22,7 +23,9 @@ namespace MovieLibrary.Website.Tests.Controllers
         {
             var result = (ViewResult) this.ActualResult;
 
-            result.ViewData.Cast<IEnumerable<IMovie>>().Should().Be.Empty();
+            var actual = (IEnumerable<IMovie>) result.ViewData.Model;
+                
+            actual.Should().Be.Empty();
         }
 
         /// <summary>
@@ -32,6 +35,13 @@ namespace MovieLibrary.Website.Tests.Controllers
         public void Should_render_the_index_view()
         {
             this.ActualResult.AssertViewRendered();
+        }
+
+        protected override void GivenThat()
+        {
+            base.GivenThat();
+
+            Dep<IMovieLibrary>().Stub(lib => lib.Contents).Return(Enumerable.Empty<IMovie>());
         }
 
         /// <summary>
