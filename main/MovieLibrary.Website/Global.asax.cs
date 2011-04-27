@@ -38,6 +38,11 @@ namespace MovieLibrary.Website
             
             RegisterRoutes(RouteTable.Routes);
 
+            SetupContainer();
+        }
+
+        private static void SetupContainer()
+        {
             var container = new WindsorContainer();
 
             container.Register(

@@ -1,4 +1,6 @@
 using System;
+using Castle.Core;
+using MovieLibrary.Core;
 using TechTalk.SpecFlow;
 
 namespace MovieLibrary.Acceptance.Tests.Steps
@@ -7,7 +9,7 @@ namespace MovieLibrary.Acceptance.Tests.Steps
     /// Steps that involve accessing the library
     /// </summary>
     [Binding]
-    public class LibrarySteps
+    public class LibrarySteps : BaseSteps
     {
         /// <summary>
         /// Setup no movies exist
@@ -15,6 +17,7 @@ namespace MovieLibrary.Acceptance.Tests.Steps
         [Given(@"I have no movies")]
         public void ClearMovies()
         {
+            this.Library.Clear();
         }
 
         /// <summary>
@@ -23,14 +26,22 @@ namespace MovieLibrary.Acceptance.Tests.Steps
         [Given(@"I have the following movies:")]
         public void SetupMovies(Table movies)
         {
+            movies.Rows.ForEach(row => AddMovieToStorage(row["title"]));
         }
 
         /// <summary>
         /// Adds a movie to the media library
         /// </summary>
         /// <param name="title">Title of the movie to add</param>
-        private static void AddMovieToStorage(string title)
+        private void AddMovieToStorage(string title)
         {
+            var movie = new Movie
+                            {
+                                Title = title,
+                                ReleaseDate = DateTime.Now
+                            };
+
+            this.Library.Add(movie);
         }
     }
 }

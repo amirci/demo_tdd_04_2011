@@ -12,7 +12,7 @@ namespace MovieLibrary.Storage.NHibernate
     /// <summary>
     /// Implementation that uses the media storage
     /// </summary>
-    public class StorageMediaLibrary : IMovieLibrary
+    public class SimpleMovieLibrary : IMovieLibrary
     {
         /// <summary>
         /// Factory to obtain the session
@@ -22,7 +22,7 @@ namespace MovieLibrary.Storage.NHibernate
         /// <summary>
         /// Initializes the repository using a persistence configurer
         /// </summary>
-        public StorageMediaLibrary(string databaseFile)
+        public SimpleMovieLibrary(string databaseFile)
         {
             var configurer = SQLiteConfiguration.Standard.UsingFile(databaseFile);
 
@@ -42,7 +42,7 @@ namespace MovieLibrary.Storage.NHibernate
         /// Constructor that injects the session factory
         /// </summary>
         /// <param name="factory">Session factory to use</param>
-        public StorageMediaLibrary(ISessionFactory factory)
+        public SimpleMovieLibrary(ISessionFactory factory)
         {
             this._factory = factory;
         }
