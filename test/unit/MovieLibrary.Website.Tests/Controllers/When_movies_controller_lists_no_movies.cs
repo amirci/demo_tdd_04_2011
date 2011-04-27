@@ -34,6 +34,9 @@ namespace MovieLibrary.Website.Tests.Controllers
             this.ActualResult.AssertViewRendered();
         }
 
+        /// <summary>
+        /// Get the result
+        /// </summary>
         protected override void WhenIRun()
         {
             this.ActualResult = this.Sut.Index();

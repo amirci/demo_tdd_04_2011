@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace MovieLibrary.Core
 {
     /// <summary>
@@ -5,6 +7,11 @@ namespace MovieLibrary.Core
     /// </summary>
     public interface IMovieLibrary
     {
+        /// <summary>
+        /// Gets the contents in the library
+        /// </summary>
+        IEnumerable<IMovie> Contents { get; }
+
         /// <summary>
         /// Clear the library
         /// </summary>

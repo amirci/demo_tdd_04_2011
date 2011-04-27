@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MavenThought.Commons">
+      <HintPath>..\..\..\packages\maventhought.commons.0.9.4\lib\MavenThought.Commons.dll</HintPath>
+    </Reference>
     <Reference Include="MavenThought.Commons.Testing.NUnit">
       <HintPath>..\..\packages\maventhought.testing.nunit.0.3.3\lib\MavenThought.Commons.Testing.NUnit.dll</HintPath>
     </Reference>
@@ -71,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Controllers\MoviesControllerSpecification.cs" />
     <Compile Include="Controllers\When_movies_controller_lists_no_movies.cs" />
+    <Compile Include="Controllers\When_movies_controller_lists_all_movies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
