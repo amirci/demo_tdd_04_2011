@@ -42,7 +42,7 @@ namespace MovieLibrary.Website
 
             container.Register(
                 Component.For<IControllerFactory>().ImplementedBy<WindsorControllerFactory>(),
-                Component.For<MoviesController>());
+                Component.For<MoviesController>().LifeStyle.Transient);
 
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
 

@@ -7,7 +7,7 @@ namespace MovieLibrary.Acceptance.Tests.Steps
     /// Steps that define navigation between pages
     /// </summary>
     [Binding]
-    public class NavigationSteps
+    public class NavigationSteps : BaseSteps
     {
         /// <summary>
         /// Goes to the specified page
@@ -15,8 +15,9 @@ namespace MovieLibrary.Acceptance.Tests.Steps
         /// <param name="pageName">Page name to got to</param>
         [When(@"I go to ""(.*)""")]
         [Given(@"I'm on the ""(.*)"" page")]
-        public void WhenIGoToPage(string pageName)
+        public void GoToPage(string pageName)
         {
+            Browser.GoTo(PathFor(pageName));
         }
 
         /// <summary>
@@ -24,11 +25,11 @@ namespace MovieLibrary.Acceptance.Tests.Steps
         /// </summary>
         /// <param name="linkText">Link to find</param>
         [When(@"I follow ""(.*)""")]
-        public void WhenIFollow(string linkText)
+        public void FollowLink(string linkText)
         {
-            // var found = Browser.Instance.Link(link => link.InnerHtml.Trim().Equals(linkText));
+            var found = Browser.Instance.Link(link => link.InnerHtml.Trim().Equals(linkText));
 
-            // found.Click();
+            found.Click();
         }
 
         /// <summary>
